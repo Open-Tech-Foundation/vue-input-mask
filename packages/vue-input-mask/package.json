@@ -1,7 +1,7 @@
 {
   "name": "@opentf/vue-input-mask",
   "version": "0.1.0",
-  "description": "Vue input masking library.",
+  "description": "The input mask for Vue.js.",
   "keywords": [
     "vue",
     "input",
