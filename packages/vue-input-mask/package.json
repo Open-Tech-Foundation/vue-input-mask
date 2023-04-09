@@ -1,0 +1,45 @@
+{
+  "name": "@opentf/vue-input-mask",
+  "version": "0.1.0",
+  "description": "Vue input masking library.",
+  "keywords": [
+    "vue",
+    "input",
+    "mask",
+    "form",
+    "phone number",
+    "credit card",
+    "zip"
+  ],
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "jest",
+    "lint": "eslint ./src/** --fix",
+    "check-types": "tsc --noEmit",
+    "ci": "turbo run build test lint check-types"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "git@github.com:open-tech-foundation/vue-input-mask.git",
+  "author": "Thanga Ganapathy",
+  "license": "MIT",
+  "dependencies": {
+    "@opentf/utils": "^0.16.0"
+  }
+}
