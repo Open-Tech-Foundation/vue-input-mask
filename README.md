@@ -12,7 +12,7 @@
 
 ## Features
 
-- Simple APIs to use
+- Simple API
 
 ## Installation
 

@@ -19,12 +19,13 @@ const emit = defineEmits(["update:modelValue"]);
 const input = ref(null);
 const inputValRef = ref();
 const tokens = {
-  "#": "[0-9]",
-  $: "[A-Za-z]",
-  "*": "[A-Za-z0-9]",
-  A: "[A-Z]",
-  a: "[a-z]",
+  "#": { pattern: "[0-9]" },
+  $: { pattern: "[A-Za-z]" },
+  "*": { pattern: "[A-Za-z0-9]" },
+  A: { pattern: "[A-Z]", tranform: (c) => c.toLocaleUpperCase() },
+  a: { pattern: "[a-z]", transform: (c) => c.toLocaleLowerCase() },
 };
+const maskChar = "_";
 
 let curInputVal = "";
 
@@ -34,12 +35,9 @@ onMounted(() => {
 });
 
 function init() {
-  const str = [];
-  for (let c of props.mask) {
-    Object.keys(tokens).includes(c) ? str.push("_") : str.push(c);
-  }
-  inputValRef.value = str.join("");
-  curInputVal = str.join("");
+  const str = mask("");
+  inputValRef.value = str;
+  curInputVal = str;
 }
 
 function setInputVal(newVal) {
@@ -49,22 +47,49 @@ function setInputVal(newVal) {
 }
 
 function handleChange(e) {
-  const { selectionStart, selectionEnd } = e.target;
-  console.log(selectionStart, selectionEnd);
-  const cursorPos = e.target.selectionStart - 1;
-  if (!props.mask[cursorPos]) {
-    setInputVal(replaceAt(curInputVal, cursorPos));
-    return;
+  const tmpInputVal = curInputVal;
+  const { selectionStart } = e.target;
+  const cursorPos = selectionStart - 1;
+
+  switch (e.inputType) {
+    case "insertText":
+      setInputVal(mask(replaceAt(inputValRef.value, selectionStart)));
+      const nextCursorPos =
+        tmpInputVal !== curInputVal ? selectionStart : cursorPos;
+      nextTick(() => {
+        input.value.setSelectionRange(nextCursorPos, nextCursorPos);
+      });
+      break;
+    case "deleteContentBackward":
+      setInputVal(replaceAt(curInputVal, selectionStart, maskChar));
+      nextTick(() => {
+        input.value.setSelectionRange(selectionStart, selectionStart);
+      });
+      break;
+    case "deleteContentForward":
+      break;
+    default:
+      break;
   }
-  const tokenPattern = tokens[props.mask[cursorPos]];
-  console.log(inputValRef.value, e.data, cursorPos, props.mask[cursorPos]);
-  const regExp = new RegExp(tokenPattern);
-  const newVal = regExp.test(e.data)
-    ? replaceAt(curInputVal, cursorPos, e.data)
-    : replaceAt(curInputVal, cursorPos, curInputVal[cursorPos]);
-  setInputVal(newVal);
-  nextTick(() => {
-    input.value.setSelectionRange(selectionStart, selectionEnd);
-  });
+}
+
+function mask(newVal) {
+  let str = "";
+  for (let i = 0; i < props.mask.length; i++) {
+    const token = props.mask[i];
+    const tokenObj = tokens[token];
+    if (!tokenObj) {
+      str += token;
+      continue;
+    }
+    const regExp = new RegExp(tokenObj.pattern);
+    if (!newVal[i] || newVal[i] === maskChar) {
+      str += maskChar;
+      continue;
+    }
+    str += regExp.test(newVal[i]) ? newVal[i] : maskChar;
+  }
+
+  return str;
 }
 </script>
