@@ -47,15 +47,24 @@ function setInputVal(newVal) {
 }
 
 function handleChange(e) {
-  const tmpInputVal = curInputVal;
+  const prevInputVal = curInputVal;
   const { selectionStart } = e.target;
-  const cursorPos = selectionStart - 1;
 
   switch (e.inputType) {
     case "insertText":
-      setInputVal(mask(replaceAt(inputValRef.value, selectionStart)));
-      const nextCursorPos =
-        tmpInputVal !== curInputVal ? selectionStart : cursorPos;
+      if (isValidInput(e.data, selectionStart - 1)) {
+        const nextChar = inputValRef.value[selectionStart];
+        setInputVal(
+          mask(
+            nextChar === maskChar
+              ? replaceAt(inputValRef.value, selectionStart)
+              : inputValRef.value
+          )
+        );
+      } else {
+        setInputVal(curInputVal);
+      }
+      const nextCursorPos = getNextCursorPos(selectionStart, prevInputVal);
       nextTick(() => {
         input.value.setSelectionRange(nextCursorPos, nextCursorPos);
       });
@@ -71,6 +80,13 @@ function handleChange(e) {
     default:
       break;
   }
+}
+
+function isValidInput(char, curPos) {
+  const token = props.mask[curPos];
+  const tokenObj = tokens[token];
+  if (!tokenObj) return;
+  return new RegExp(tokenObj.pattern).test(char);
 }
 
 function mask(newVal) {
@@ -91,5 +107,18 @@ function mask(newVal) {
   }
 
   return str;
+}
+
+function getNextCursorPos(curPos, prevInputVal) {
+  if (prevInputVal === inputValRef.value) {
+    return curPos - 1;
+  }
+  for (let i = curPos; i < props.mask.length; i++) {
+    if (Object.keys(tokens).includes(props.mask[i])) {
+      return i;
+    }
+  }
+
+  return curPos;
 }
 </script>

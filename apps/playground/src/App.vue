@@ -4,6 +4,7 @@ import { InputMask } from "../../../packages/vue-input-mask/src";
 
 const state = reactive({
   numberOnly: "",
+  creditCard: '',
   stringOnly: "",
   date: "",
   time: "",
@@ -30,6 +31,13 @@ const state = reactive({
           </td>
           <td>Mask: ####</td>
           <td>Value: {{ state.numberOnly }}</td>
+        </tr>
+        <tr>
+          <td>
+            <input-mask mask="#### #### #### ####" v-model="state.creditCard"></input-mask>
+          </td>
+          <td>Mask: #### #### #### #### </td>
+          <td>Value: {{ state.creditCard }}</td>
         </tr>
         <tr>
           <td>
