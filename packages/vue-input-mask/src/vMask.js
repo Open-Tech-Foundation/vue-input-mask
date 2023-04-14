@@ -32,10 +32,12 @@ function mask(newVal, maskPattern) {
 }
 
 export default {
-  mounted: (el, binding, vnode) => {
+  mounted: (el, binding) => {
     const input =
       el instanceof HTMLInputElement ? el : el.querySelector("input");
-    const maskPattern = binding.value;
+    const options = {
+      maskPattern: binding.value.mask || "",
+    };
     let curInputVal = "";
 
     function setInputVal(val) {
@@ -48,8 +50,8 @@ export default {
       if (prevVal === curVal) {
         return curPos - 1;
       }
-      for (let i = curPos; i < maskPattern.length; i++) {
-        if (Object.keys(tokens).includes(maskPattern[i])) {
+      for (let i = curPos; i < options.maskPattern.length; i++) {
+        if (Object.keys(tokens).includes(options.maskPattern[i])) {
           return i;
         }
       }
@@ -58,37 +60,43 @@ export default {
     }
 
     function isValidInput(char, curPos) {
-      const token = maskPattern[curPos];
+      const token = options.maskPattern[curPos];
       const tokenObj = tokens[token];
       if (!tokenObj) return;
       return new RegExp(tokenObj.pattern).test(char);
     }
 
-    setInputVal(mask(input.value, maskPattern));
+    setInputVal(mask(input.value, options.maskPattern));
 
     el.addEventListener("input", (e) => {
+      console.log(e);
       const prevInputVal = curInputVal;
       const { selectionStart, value } = e.target;
 
+      function handleInsert() {
+        if (isValidInput(e.data, selectionStart - 1)) {
+          const nextChar = value[selectionStart];
+          setInputVal(
+            mask(
+              nextChar === maskChar ? replaceAt(value, selectionStart) : value,
+              options.maskPattern
+            )
+          );
+        } else {
+          setInputVal(curInputVal);
+        }
+        const nextCursorPos = getNextCursorPos(selectionStart, prevInputVal);
+        nextTick(() => {
+          e.target.setSelectionRange(nextCursorPos, nextCursorPos);
+        });
+      }
+
       switch (e.inputType) {
+        case "":
+          handleInsert();
+          break;
         case "insertText":
-          if (isValidInput(e.data, selectionStart - 1)) {
-            const nextChar = value[selectionStart];
-            setInputVal(
-              mask(
-                nextChar === maskChar
-                  ? replaceAt(value, selectionStart)
-                  : value,
-                maskPattern
-              )
-            );
-          } else {
-            setInputVal(curInputVal);
-          }
-          const nextCursorPos = getNextCursorPos(selectionStart, prevInputVal);
-          nextTick(() => {
-            e.target.setSelectionRange(nextCursorPos, nextCursorPos);
-          });
+          handleInsert();
           break;
         case "deleteContentBackward":
           setInputVal(replaceAt(curInputVal, selectionStart, maskChar));
@@ -97,8 +105,6 @@ export default {
           });
           break;
         case "deleteContentForward":
-          break;
-        default:
           break;
       }
     });

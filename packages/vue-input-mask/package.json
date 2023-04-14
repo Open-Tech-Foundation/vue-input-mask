@@ -1,7 +1,7 @@
 {
   "name": "@opentf/vue-input-mask",
   "version": "0.1.0",
-  "description": "The input mask for Vue.js.",
+  "description": "The input mask directive for Vue.js.",
   "keywords": [
     "vue",
     "input",
@@ -28,7 +28,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "test": "jest",
+    "test": "cypress run --config-file cypress.config.js --component",
+    "cy": "cypress open --component --browser chrome",
     "lint": "eslint ./src/** --fix",
     "check-types": "tsc --noEmit",
     "ci": "turbo run build test lint check-types"
@@ -41,5 +42,16 @@
   "license": "MIT",
   "dependencies": {
     "@opentf/utils": "^0.16.0"
+  },
+  "devDependencies": {
+    "@testing-library/user-event": "^14.4.3",
+    "@testing-library/vue": "^7.0.0",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vue/test-utils": "^2.3.2",
+    "cypress": "^12.9.0",
+    "jsdom": "^21.1.1",
+    "vite": "^4.2.0",
+    "vitest": "^0.30.1",
+    "vue": "^3.2.47"
   }
 }

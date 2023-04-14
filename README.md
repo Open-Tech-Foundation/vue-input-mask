@@ -8,7 +8,7 @@
 
 </div>
 
-> The input mask for Vue.js.
+> The input mask directive for Vue.js.
 
 ## Features
 
