@@ -9,7 +9,9 @@ const state = reactive({
   stringOnly: "",
   date: "",
   time: "",
-  upper: ""
+  upper: "",
+  usPhone: "",
+  price: "",
 });
 </script>
 
@@ -24,13 +26,38 @@ const state = reactive({
         * - Number or String [a-z, A-Z, 0-9]
         A - Uppercase String [A-Z]
         a - Lowercase String [a-z]
+        \\ - Escape token char
     </pre>
     <table>
       <tbody>
         <tr>
           <td>
             <v-text-field
-              v-mask="{mask: 'AA'}"
+              v-mask="{ mask: '\\$ ##.##' }"
+              label="Price"
+              variant="outlined"
+              v-model="state.price"
+            ></v-text-field>
+          </td>
+          <td>Mask: $ ##.##</td>
+          <td>Value: {{ state.price }}</td>
+        </tr>
+        <tr>
+          <td>
+            <v-text-field
+              v-mask="{ mask: '+1 (###) ###-####' }"
+              label="Label"
+              variant="outlined"
+              v-model="state.usPhone"
+            ></v-text-field>
+          </td>
+          <td>Mask: +1 (###) ###-####</td>
+          <td>Value: {{ state.usPhone }}</td>
+        </tr>
+        <tr>
+          <td>
+            <v-text-field
+              v-mask="{ mask: 'AA' }"
               label="Label"
               variant="outlined"
               v-model="state.upper"
@@ -53,7 +80,7 @@ const state = reactive({
         </tr>
         <tr>
           <td>
-            <input v-mask="'####'" v-model="state.numberOnly" />
+            <input  v-mask="{ mask: '####' }" v-model="state.numberOnly" />
           </td>
           <td>Mask: ####</td>
           <td>Value: {{ state.numberOnly }}</td>

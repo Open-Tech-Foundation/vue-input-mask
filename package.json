@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "play": "pnpm run dev --filter=playground"
+    "play": "pnpm run --filter=playground dev",
+    "cy": "pnpm run --filter=vue-input-mask cy"
   }
 }

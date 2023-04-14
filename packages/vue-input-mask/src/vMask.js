@@ -16,18 +16,20 @@ function mask(newVal, maskPattern) {
   for (let i = 0; i < maskPattern.length; i++) {
     let char = newVal[i];
     const token = maskPattern[i];
-    const tokenObj = tokens[token];
-    if (!tokenObj) {
+
+    if (typeof token === "string") {
       str += token;
       continue;
     }
-    const regExp = new RegExp(tokenObj.pattern);
+
     if (!char || char === maskChar) {
       str += maskChar;
       continue;
     }
-    if (tokenObj.transform) {
-      char = tokenObj.transform(char);
+
+    const regExp = new RegExp(token.pattern);
+    if (token.transform) {
+      char = token.transform(char);
     }
     str += regExp.test(char) ? char : maskChar;
   }
@@ -35,12 +37,34 @@ function mask(newVal, maskPattern) {
   return str;
 }
 
+function parseMask(mask = []) {
+  const arr = [];
+
+  for (let i = 0; i < mask.length; i++) {
+    const c = mask[i];
+    if (Object.keys(tokens).includes(c)) {
+      arr.push(tokens[c]);
+      continue;
+    }
+
+    if (c === "\\") {
+      arr.push(mask[i + 1]);
+      i++;
+      continue;
+    }
+
+    arr.push(c);
+  }
+
+  return arr;
+}
+
 export default {
   mounted: (el, binding) => {
     const input =
       el instanceof HTMLInputElement ? el : el.querySelector("input");
     const options = {
-      maskPattern: binding.value.mask || "",
+      maskPattern: parseMask(binding.value.mask),
     };
     let curInputVal = "";
 
@@ -66,18 +90,35 @@ export default {
     function isValidInput(char, curPos) {
       let c = char;
       const token = options.maskPattern[curPos];
-      const tokenObj = tokens[token];
 
-      if (!tokenObj) return;
+      if (!token) return;
 
-      if (tokenObj.transform) {
-        c = tokenObj.transform(c);
+      if (token.transform) {
+        c = token.transform(c);
       }
 
-      return new RegExp(tokenObj.pattern).test(c);
+      return new RegExp(token.pattern).test(c);
     }
 
+    // Init with placeholders
     setInputVal(mask(input.value, options.maskPattern));
+
+    function setCursorPos(e) {
+      const pos = input.value.indexOf(maskChar);
+      if (pos !== -1) {
+        nextTick(() => {
+          e.target.setSelectionRange(pos, pos);
+        });
+      }
+    }
+
+    input.addEventListener("focus", (e) => {
+      setCursorPos(e);
+    });
+
+    input.addEventListener("click", (e) => {
+      setCursorPos(e);
+    });
 
     el.addEventListener("input", (e) => {
       const prevInputVal = curInputVal;
@@ -95,16 +136,11 @@ export default {
         } else {
           setInputVal(curInputVal);
         }
-        const nextCursorPos = getNextCursorPos(selectionStart, prevInputVal);
-        nextTick(() => {
-          e.target.setSelectionRange(nextCursorPos, nextCursorPos);
-        });
+        setCursorPos(e);
       }
 
       switch (e.inputType) {
         case "":
-          handleInsert();
-          break;
         case "insertText":
           handleInsert();
           break;
