@@ -5,7 +5,7 @@ const tokens = {
   "#": { pattern: "[0-9]" },
   $: { pattern: "[A-Za-z]" },
   "*": { pattern: "[A-Za-z0-9]" },
-  A: { pattern: "[A-Z]", tranform: (c) => c.toLocaleUpperCase() },
+  A: { pattern: "[A-Z]", transform: (c) => c.toLocaleUpperCase() },
   a: { pattern: "[a-z]", transform: (c) => c.toLocaleLowerCase() },
 };
 
@@ -14,6 +14,7 @@ const maskChar = "_";
 function mask(newVal, maskPattern) {
   let str = "";
   for (let i = 0; i < maskPattern.length; i++) {
+    let char = newVal[i];
     const token = maskPattern[i];
     const tokenObj = tokens[token];
     if (!tokenObj) {
@@ -21,11 +22,14 @@ function mask(newVal, maskPattern) {
       continue;
     }
     const regExp = new RegExp(tokenObj.pattern);
-    if (!newVal[i] || newVal[i] === maskChar) {
+    if (!char || char === maskChar) {
       str += maskChar;
       continue;
     }
-    str += regExp.test(newVal[i]) ? newVal[i] : maskChar;
+    if (tokenObj.transform) {
+      char = tokenObj.transform(char);
+    }
+    str += regExp.test(char) ? char : maskChar;
   }
 
   return str;
@@ -60,16 +64,22 @@ export default {
     }
 
     function isValidInput(char, curPos) {
+      let c = char;
       const token = options.maskPattern[curPos];
       const tokenObj = tokens[token];
+
       if (!tokenObj) return;
-      return new RegExp(tokenObj.pattern).test(char);
+
+      if (tokenObj.transform) {
+        c = tokenObj.transform(c);
+      }
+
+      return new RegExp(tokenObj.pattern).test(c);
     }
 
     setInputVal(mask(input.value, options.maskPattern));
 
     el.addEventListener("input", (e) => {
-      console.log(e);
       const prevInputVal = curInputVal;
       const { selectionStart, value } = e.target;
 

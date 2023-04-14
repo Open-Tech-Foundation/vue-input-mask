@@ -1,13 +1,15 @@
 <script setup>
 import { reactive } from "vue";
-import { InputMask } from "../../../packages/vue-input-mask/src";
+import { vMask } from "../../../packages/vue-input-mask/src";
 
 const state = reactive({
-  numberOnly: "",
-  creditCard: '',
+  vuetify: "123",
+  numberOnly: "1",
+  creditCard: "",
   stringOnly: "",
   date: "",
   time: "",
+  upper: ""
 });
 </script>
 
@@ -27,37 +29,61 @@ const state = reactive({
       <tbody>
         <tr>
           <td>
-            <input-mask mask="####" v-model="state.numberOnly"></input-mask>
+            <v-text-field
+              v-mask="{mask: 'AA'}"
+              label="Label"
+              variant="outlined"
+              v-model="state.upper"
+            ></v-text-field>
+          </td>
+          <td>Mask: AA</td>
+          <td>Value: {{ state.upper }}</td>
+        </tr>
+        <tr>
+          <td>
+            <v-text-field
+              v-mask="'#####'"
+              label="Label"
+              variant="outlined"
+              v-model="state.vuetify"
+            ></v-text-field>
+          </td>
+          <td>Mask: #####</td>
+          <td>Value: {{ state.vuetify }}</td>
+        </tr>
+        <tr>
+          <td>
+            <input v-mask="'####'" v-model="state.numberOnly" />
           </td>
           <td>Mask: ####</td>
           <td>Value: {{ state.numberOnly }}</td>
         </tr>
         <tr>
           <td>
-            <input-mask mask="#### #### #### ####" v-model="state.creditCard"></input-mask>
+            <input v-mask="'#### #### #### ####'" v-model="state.creditCard" />
           </td>
-          <td>Mask: #### #### #### #### </td>
+          <td>Mask: #### #### #### ####</td>
           <td>Value: {{ state.creditCard }}</td>
         </tr>
         <tr>
           <td>
-            <input-mask mask="$$$$$" v-model="state.stringOnly"></input-mask>
+            <input v-mask="'$$$$$'" v-model="state.stringOnly" />
           </td>
           <td>Mask: $$$$$</td>
           <td>Value: {{ state.stringOnly }}</td>
         </tr>
         <tr>
           <td>
-            <input-mask mask="##/##/####" v-model="state.date"></input-mask>
+            <input v-mask="'##/##/####'" v-model="state.date" />
           </td>
           <td>Mask: ##/##/####</td>
           <td>Value: {{ state.date }}</td>
         </tr>
         <tr>
           <td>
-            <input-mask mask="##:## AA" v-model="state.time"></input-mask>
+            <input v-mask="'##:## {[AP]}M'" v-model="state.time" />
           </td>
-          <td>Mask: ##:## AA</td>
+          <td>Mask: ##:## {[AP]}M</td>
           <td>Value: {{ state.time }}</td>
         </tr>
       </tbody>
