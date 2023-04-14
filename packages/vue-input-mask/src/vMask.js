@@ -53,6 +53,20 @@ function parseMask(mask = []) {
       continue;
     }
 
+    if (c === "{") {
+      let pat = "";
+      for (let j = i + 1; j < mask.length; j++) {
+        if (mask[j] === "}") {
+          arr.push({ pattern: pat });
+          i += pat.length + 1;
+          break;
+        } else {
+          pat += mask[j];
+        }
+      }
+      continue;
+    }
+
     arr.push(c);
   }
 
@@ -103,13 +117,12 @@ export default {
     // Init with placeholders
     setInputVal(mask(input.value, options.maskPattern));
 
-    function setCursorPos(e) {
-      const pos = input.value.indexOf(maskChar);
-      if (pos !== -1) {
-        nextTick(() => {
-          e.target.setSelectionRange(pos, pos);
-        });
-      }
+    function setCursorPos(e, selectionStart) {
+      let pos = input.value.indexOf(maskChar);
+      pos = pos === -1 ? selectionStart : pos;
+      nextTick(() => {
+        e.target.setSelectionRange(pos, pos);
+      });
     }
 
     input.addEventListener("focus", (e) => {
@@ -128,15 +141,12 @@ export default {
         if (isValidInput(e.data, selectionStart - 1)) {
           const nextChar = value[selectionStart];
           setInputVal(
-            mask(
-              nextChar === maskChar ? replaceAt(value, selectionStart) : value,
-              options.maskPattern
-            )
+            mask(replaceAt(value, selectionStart), options.maskPattern)
           );
         } else {
           setInputVal(curInputVal);
         }
-        setCursorPos(e);
+        setCursorPos(e, selectionStart);
       }
 
       switch (e.inputType) {

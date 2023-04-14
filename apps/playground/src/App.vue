@@ -27,9 +27,20 @@ const state = reactive({
         A - Uppercase String [A-Z]
         a - Lowercase String [a-z]
         \\ - Escape token char
+        {} - Regurlar expression
     </pre>
     <table>
       <tbody>
+        <tr>
+          <td>
+            <v-text-field
+              v-mask="{ mask: '##:## {[AP]}M' }"
+              v-model="state.time"
+            ></v-text-field>
+          </td>
+          <td>Mask: ##:## {[AP]}M</td>
+          <td>Value: {{ state.time }}</td>
+        </tr>
         <tr>
           <td>
             <v-text-field
@@ -69,7 +80,7 @@ const state = reactive({
         <tr>
           <td>
             <v-text-field
-              v-mask="'#####'"
+              v-mask="{ mask: '#####'}"
               label="Label"
               variant="outlined"
               v-model="state.vuetify"
@@ -80,7 +91,7 @@ const state = reactive({
         </tr>
         <tr>
           <td>
-            <input  v-mask="{ mask: '####' }" v-model="state.numberOnly" />
+            <input v-mask="{ mask: '####' }" v-model="state.numberOnly" />
           </td>
           <td>Mask: ####</td>
           <td>Value: {{ state.numberOnly }}</td>
@@ -105,13 +116,6 @@ const state = reactive({
           </td>
           <td>Mask: ##/##/####</td>
           <td>Value: {{ state.date }}</td>
-        </tr>
-        <tr>
-          <td>
-            <input v-mask="'##:## {[AP]}M'" v-model="state.time" />
-          </td>
-          <td>Mask: ##:## {[AP]}M</td>
-          <td>Value: {{ state.time }}</td>
         </tr>
       </tbody>
     </table>
