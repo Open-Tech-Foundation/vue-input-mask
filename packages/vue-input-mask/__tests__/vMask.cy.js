@@ -84,4 +84,20 @@ describe("vMask directive", () => {
     cy.get("input").should("have.value", "12:34");
     cy.get("p").should("have.text", "1234");
   });
+  it("custom tokens", () => {
+    cy.mount(InputMask, {
+      props: {
+        mask: "\\#FFFFF",
+        tokens: {
+          F: {
+            pattern: "[0-9a-fA-F]",
+            transform: (v) => v.toLocaleUpperCase(),
+          },
+        },
+      },
+    });
+    cy.get("input").should("have.value", "#_____");
+    cy.get("input").type("1a2Bf");
+    cy.get("input").should("have.value", "#1A2BF");
+  });
 });

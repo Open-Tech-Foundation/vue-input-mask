@@ -37,7 +37,7 @@ function mask(newVal, maskPattern) {
   return str;
 }
 
-function parseMask(mask = []) {
+function parseMask(mask = [], tokens) {
   const arr = [];
 
   for (let i = 0; i < mask.length; i++) {
@@ -78,7 +78,10 @@ export default {
     const input =
       el instanceof HTMLInputElement ? el : el.querySelector("input");
     const options = {
-      maskPattern: parseMask(binding.value.mask),
+      maskPattern: parseMask(binding.value.mask, {
+        ...tokens,
+        ...(binding.value.tokens || {}),
+      }),
       raw: binding.value.raw,
     };
     let curInputVal = "";

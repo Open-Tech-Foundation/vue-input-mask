@@ -12,6 +12,7 @@ const state = reactive({
   upper: "",
   usPhone: "",
   price: "",
+  hex: "",
 });
 
 const raw = reactive({
@@ -38,12 +39,20 @@ const raw = reactive({
         <tr>
           <td>
             <v-text-field
-              v-mask="{ mask: '##:## {[AP]}M' }"
-              v-model="state.time"
+              v-mask="{
+                mask: '\\#FFFFFF',
+                tokens: {
+                  F: {
+                    pattern: '[0-9a-fA-F]',
+                    transform: (v) => v.toLocaleUpperCase(),
+                  },
+                },
+              }"
+              v-model="state.hex"
             ></v-text-field>
           </td>
-          <td>Mask: ##:## {[AP]}M</td>
-          <td>Value: {{ state.time }}</td>
+          <td>Mask: \\#FFFFFF</td>
+          <td>Value: {{ state.hex }}</td>
         </tr>
         <tr>
           <td>
@@ -64,7 +73,10 @@ const raw = reactive({
         <tr>
           <td>
             <v-text-field
-              v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw.usPhone = v), }"
+              v-mask="{
+                mask: '+1 (###) ###-####',
+                raw: (v) => (raw.usPhone = v),
+              }"
               label="Label"
               variant="outlined"
               v-model="state.usPhone"
