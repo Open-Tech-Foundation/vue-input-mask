@@ -88,19 +88,6 @@ export default {
       input.dispatchEvent(new Event("input"));
     }
 
-    function getNextCursorPos(curPos, prevVal, curVal) {
-      if (prevVal === curVal) {
-        return curPos - 1;
-      }
-      for (let i = curPos; i < options.maskPattern.length; i++) {
-        if (Object.keys(tokens).includes(options.maskPattern[i])) {
-          return i;
-        }
-      }
-
-      return curPos;
-    }
-
     function isValidInput(char, curPos) {
       let c = char;
       const token = options.maskPattern[curPos];
@@ -117,11 +104,11 @@ export default {
     // Init with placeholders
     setInputVal(mask(input.value, options.maskPattern));
 
-    function setCursorPos(e, selectionStart) {
+    function setCursorPos(e, start, end) {
       let pos = input.value.indexOf(maskChar);
-      pos = pos === -1 ? selectionStart : pos;
+      pos = pos === -1 ? start : pos;
       nextTick(() => {
-        e.target.setSelectionRange(pos, pos);
+        e.target.setSelectionRange(pos, start === end ? pos : end);
       });
     }
 
@@ -130,12 +117,11 @@ export default {
     });
 
     input.addEventListener("click", (e) => {
-      setCursorPos(e);
+      setCursorPos(e, e.target.selectionStart, e.target.selectionEnd);
     });
 
     el.addEventListener("input", (e) => {
-      const prevInputVal = curInputVal;
-      const { selectionStart, value } = e.target;
+      const { selectionStart, selectionEnd, value } = e.target;
 
       function handleInsert() {
         if (isValidInput(e.data, selectionStart - 1)) {
@@ -146,7 +132,7 @@ export default {
         } else {
           setInputVal(curInputVal);
         }
-        setCursorPos(e, selectionStart);
+        setCursorPos(e, selectionStart, selectionEnd);
       }
 
       switch (e.inputType) {
