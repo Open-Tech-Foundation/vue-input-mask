@@ -79,13 +79,31 @@ export default {
       el instanceof HTMLInputElement ? el : el.querySelector("input");
     const options = {
       maskPattern: parseMask(binding.value.mask),
+      raw: binding.value.raw,
     };
     let curInputVal = "";
+
+    function getRawValue(val) {
+      let str = "";
+      for (let i = 0; i < options.maskPattern.length; i++) {
+        let char = val[i];
+        const token = options.maskPattern[i];
+
+        if (typeof token === "object" && char !== maskChar) {
+          str += char;
+        }
+      }
+
+      return str;
+    }
 
     function setInputVal(val) {
       curInputVal = val;
       input.value = val;
       input.dispatchEvent(new Event("input"));
+      if (options.raw) {
+        options.raw(getRawValue(val));
+      }
     }
 
     function isValidInput(char, curPos) {

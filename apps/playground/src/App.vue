@@ -13,6 +13,10 @@ const state = reactive({
   usPhone: "",
   price: "",
 });
+
+const raw = reactive({
+  price: "",
+});
 </script>
 
 <template>
@@ -44,7 +48,10 @@ const state = reactive({
         <tr>
           <td>
             <v-text-field
-              v-mask="{ mask: '\\$ ##.##' }"
+              v-mask="{
+                mask: '\\$ ##.##',
+                raw: (v) => (raw.price = v),
+              }"
               label="Price"
               variant="outlined"
               v-model="state.price"
@@ -52,11 +59,12 @@ const state = reactive({
           </td>
           <td>Mask: $ ##.##</td>
           <td>Value: {{ state.price }}</td>
+          <td>Raw: {{ raw.price }}</td>
         </tr>
         <tr>
           <td>
             <v-text-field
-              v-mask="{ mask: '+1 (###) ###-####' }"
+              v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw.usPhone = v), }"
               label="Label"
               variant="outlined"
               v-model="state.usPhone"
@@ -64,6 +72,7 @@ const state = reactive({
           </td>
           <td>Mask: +1 (###) ###-####</td>
           <td>Value: {{ state.usPhone }}</td>
+          <td>Raw: {{ raw.usPhone }}</td>
         </tr>
         <tr>
           <td>
@@ -80,7 +89,7 @@ const state = reactive({
         <tr>
           <td>
             <v-text-field
-              v-mask="{ mask: '#####'}"
+              v-mask="{ mask: '#####' }"
               label="Label"
               variant="outlined"
               v-model="state.vuetify"

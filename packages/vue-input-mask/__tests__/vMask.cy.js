@@ -77,4 +77,11 @@ describe("vMask directive", () => {
     cy.get("input").type("{home}1234A");
     cy.get("input").should("have.value", "12 : 34 AM");
   });
+  it("raw", () => {
+    cy.mount(InputMask, { props: { mask: "##:##" } });
+    cy.get("input").should("have.value", "__:__");
+    cy.get("input").type("1234");
+    cy.get("input").should("have.value", "12:34");
+    cy.get("p").should("have.text", "1234");
+  });
 });
