@@ -141,12 +141,24 @@ export default {
           handleInsert();
           break;
         case "deleteContentBackward":
-          setInputVal(replaceAt(curInputVal, selectionStart, maskChar));
+          if (typeof options.maskPattern[selectionStart] === "string") {
+            setInputVal(curInputVal);
+          } else {
+            setInputVal(replaceAt(curInputVal, selectionStart, maskChar));
+          }
           nextTick(() => {
             e.target.setSelectionRange(selectionStart, selectionStart);
           });
           break;
         case "deleteContentForward":
+          if (typeof options.maskPattern[selectionStart] === "string") {
+            setInputVal(curInputVal);
+          } else {
+            setInputVal(replaceAt(curInputVal, selectionStart, maskChar));
+          }
+          nextTick(() => {
+            e.target.setSelectionRange(selectionStart + 1, selectionStart + 1);
+          });
           break;
       }
     });
