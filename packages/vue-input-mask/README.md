@@ -60,4 +60,4 @@ import { vMask } from "@opentf/vue-input-mask";
 
 ## License
 
-Copyright (c) [Thanga Ganapathy](https://github.com/Thanga-Ganapathy) ([MIT License](./LICENSE)).
+Copyright (c) [Thanga Ganapathy](https://github.com/Thanga-Ganapathy) ([MIT License](../../LICENSE)).
