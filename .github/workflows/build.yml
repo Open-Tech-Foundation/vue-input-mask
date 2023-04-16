@@ -37,3 +37,8 @@ jobs:
         cache: 'pnpm'
     - run: pnpm install
     - run: pnpm ci
+    - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          component: true
+          browser: chrome

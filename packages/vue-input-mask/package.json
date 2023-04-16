@@ -27,10 +27,9 @@
   },
   "scripts": {
     "build": "vite build",
-    "test": "cypress run --config-file cypress.config.js --component --browser chrome",
     "cy": "cypress open --component --browser chrome",
     "lint": "eslint ./src/** --fix",
-    "ci": "pnpm build && pnpm test && pnpm lint"
+    "ci": "pnpm build && pnpm lint"
   },
   "publishConfig": {
     "access": "public"
