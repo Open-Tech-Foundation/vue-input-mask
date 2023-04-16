@@ -35,11 +35,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
+    - name: Cypress install
+      uses: cypress-io/github-action@v5
+      with:
+        # just perform install
+        runTests: false
+    - run: pnpm ci
     - name: Cypress run
       uses: cypress-io/github-action@v5
       with:
-        component: true
-        browser: chrome
+        # we have already installed all dependencies above
+        install: false
         working-directory: packages/vue-input-mask
         cache-key: node-v${{ matrix.node }}-on-${{ runner.os }}-hash-${{ hashFiles('pnpm-lock.yaml') }}
-    - run: pnpm ci
+        component: true
+        browser: chrome
