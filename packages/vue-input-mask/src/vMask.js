@@ -1,23 +1,23 @@
-import { replaceAt } from "@opentf/utils";
-import { nextTick } from "vue";
+import { replaceAt } from '@opentf/utils';
+import { nextTick } from 'vue';
 
 const tokens = {
-  "#": { pattern: "[0-9]" },
-  $: { pattern: "[A-Za-z]" },
-  "*": { pattern: "[A-Za-z0-9]" },
-  A: { pattern: "[A-Z]", transform: (c) => c.toLocaleUpperCase() },
-  a: { pattern: "[a-z]", transform: (c) => c.toLocaleLowerCase() },
+  '#': { pattern: '[0-9]' },
+  $: { pattern: '[A-Za-z]' },
+  '*': { pattern: '[A-Za-z0-9]' },
+  A: { pattern: '[A-Z]', transform: (c) => c.toLocaleUpperCase() },
+  a: { pattern: '[a-z]', transform: (c) => c.toLocaleLowerCase() },
 };
 
-const maskChar = "_";
+const maskChar = '_';
 
 function mask(newVal, maskPattern) {
-  let str = "";
+  let str = '';
   for (let i = 0; i < maskPattern.length; i++) {
     let char = newVal[i];
     const token = maskPattern[i];
 
-    if (typeof token === "string") {
+    if (typeof token === 'string') {
       str += token;
       continue;
     }
@@ -47,16 +47,16 @@ function parseMask(mask = [], tokens) {
       continue;
     }
 
-    if (c === "\\") {
+    if (c === '\\') {
       arr.push(mask[i + 1]);
       i++;
       continue;
     }
 
-    if (c === "{") {
-      let pat = "";
+    if (c === '{') {
+      let pat = '';
       for (let j = i + 1; j < mask.length; j++) {
-        if (mask[j] === "}") {
+        if (mask[j] === '}') {
           arr.push({ pattern: pat });
           i += pat.length + 1;
           break;
@@ -76,7 +76,7 @@ function parseMask(mask = [], tokens) {
 export default {
   mounted: (el, binding) => {
     const input =
-      el instanceof HTMLInputElement ? el : el.querySelector("input");
+      el instanceof HTMLInputElement ? el : el.querySelector('input');
     const options = {
       maskPattern: parseMask(binding.value.mask, {
         ...tokens,
@@ -84,15 +84,15 @@ export default {
       }),
       raw: binding.value.raw,
     };
-    let curInputVal = "";
+    let curInputVal = '';
 
     function getRawValue(val) {
-      let str = "";
+      let str = '';
       for (let i = 0; i < options.maskPattern.length; i++) {
         let char = val[i];
         const token = options.maskPattern[i];
 
-        if (typeof token === "object" && char !== maskChar) {
+        if (typeof token === 'object' && char !== maskChar) {
           str += char;
         }
       }
@@ -103,7 +103,7 @@ export default {
     function setInputVal(val) {
       curInputVal = val;
       input.value = val;
-      input.dispatchEvent(new Event("input"));
+      input.dispatchEvent(new Event('input'));
       if (options.raw) {
         options.raw(getRawValue(val));
       }
@@ -133,20 +133,19 @@ export default {
       });
     }
 
-    input.addEventListener("focus", (e) => {
+    input.addEventListener('focus', (e) => {
       setCursorPos(e);
     });
 
-    input.addEventListener("click", (e) => {
+    input.addEventListener('click', (e) => {
       setCursorPos(e, e.target.selectionStart, e.target.selectionEnd);
     });
 
-    el.addEventListener("input", (e) => {
+    el.addEventListener('input', (e) => {
       const { selectionStart, selectionEnd, value } = e.target;
 
       function handleInsert() {
         if (isValidInput(e.data, selectionStart - 1)) {
-          const nextChar = value[selectionStart];
           setInputVal(
             mask(replaceAt(value, selectionStart), options.maskPattern)
           );
@@ -157,12 +156,12 @@ export default {
       }
 
       switch (e.inputType) {
-        case "":
-        case "insertText":
+        case '':
+        case 'insertText':
           handleInsert();
           break;
-        case "deleteContentBackward":
-          if (typeof options.maskPattern[selectionStart] === "string") {
+        case 'deleteContentBackward':
+          if (typeof options.maskPattern[selectionStart] === 'string') {
             setInputVal(curInputVal);
           } else {
             setInputVal(replaceAt(curInputVal, selectionStart, maskChar));
@@ -171,8 +170,8 @@ export default {
             e.target.setSelectionRange(selectionStart, selectionStart);
           });
           break;
-        case "deleteContentForward":
-          if (typeof options.maskPattern[selectionStart] === "string") {
+        case 'deleteContentForward':
+          if (typeof options.maskPattern[selectionStart] === 'string') {
             setInputVal(curInputVal);
           } else {
             setInputVal(replaceAt(curInputVal, selectionStart, maskChar));

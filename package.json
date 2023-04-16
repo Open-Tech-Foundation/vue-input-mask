@@ -2,6 +2,12 @@
   "private": true,
   "scripts": {
     "play": "pnpm run --filter=playground dev",
-    "cy": "pnpm run --filter=vue-input-mask cy"
+    "cy": "pnpm run --filter=vue-input-mask cy",
+    "web": "pnpm run --filter=website docs:dev",
+    "ci": "pnpm run --filter=vue-input-mask ci",
+    "publish-packages": "pnpm ci && changeset version && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.1"
   }
 }
