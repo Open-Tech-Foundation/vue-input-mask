@@ -11,13 +11,13 @@ hero:
       link: /get-started
     - theme: alt
       text: Demo
-      link: /demo
+      link: /demo/native-input/
 
 features:
   - title: Lightweight
-    details: 2 KB GZipped.
+    details: ~1.5 KB GZipped.
   - title: RegExp Support
     details: You can define your own regular expression to validate the input.
   - title: Custom Tokens
-    details: Extend tokens with your own token with validation & transformation.  
+    details: Extend default tokens with your own tokens, including validation & transformation.
 ---

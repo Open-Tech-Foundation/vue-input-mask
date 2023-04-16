@@ -9,16 +9,16 @@ export default defineConfig({
     localSearch: true,
     nav: [
       { text: "Home", link: "/" },
-      { text: "Demo", link: "/demo/native" },
+      { text: "Demo", link: "/demo/native-input/" },
     ],
 
     sidebar: [
       {
-        items: [{ text: "Getting Started", link: "/get-started" }],
+        items: [{ text: "Getting Started", link: "/get-started" }, { text: "Guide", link: "/guide" }],
       },
       {
         text: "Demo",
-        items: [{ text: "Native", link: "/demo/native" }],
+        items: [{ text: "Native Input", link: "/demo/native-input/" }, { text: "Vuetify", link: "/demo/vuetify/" }],
       },
     ],
 

@@ -17,12 +17,8 @@ async function run() {
       'public/index.html': Index,
       'src/main.js': Main,
       'src/App.vue': App,
-      'package.json': `{
-      "name": "vue-input-mask-native",
-      "dependencies": {},
-      "stackblitz": { "installDependencies": true }
-    }`,
     },
+    dependencies: { "@opentf/vue-input-mask": "0.1.0" },
   },
   {
     view: 'preview',
@@ -41,7 +37,9 @@ run()
 <style>
   #preview {
     width: 100%;
-    height: 500px
+    height: 500px;
+    margin-top: 50px;
+    border: 1px groove lightgray;
   }
 </style>
 
