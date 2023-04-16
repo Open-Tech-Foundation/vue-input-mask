@@ -1,0 +1,17 @@
+{
+  "name": "website",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev --port 3000",
+    "docs:build": "vitepress build"
+  },
+  "devDependencies": {
+    "vitepress": "1.0.0-alpha.65"
+  },
+  "dependencies": {
+    "@codesandbox/sandpack-client": "^2.6.0",
+    "@stackblitz/sdk": "^1.9.0",
+    "sandpack-vue3": "^3.1.0",
+    "vuetify": "^3.1.13"
+  }
+}
