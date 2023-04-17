@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.3.0
+
+### Minor Changes
+
+- f8ce6d8: Fix UMD build name
+
 ## 0.2.0
 
 ### Minor Changes
