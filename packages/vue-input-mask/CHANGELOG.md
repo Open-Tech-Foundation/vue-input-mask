@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.4.0
+
+### Minor Changes
+
+- 79b8ea9: Added default export for UMD build
+
 ## 0.3.0
 
 ### Minor Changes
