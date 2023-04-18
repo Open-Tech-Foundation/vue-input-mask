@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.5.0
+
+### Minor Changes
+
+- 2b840c4: Changed UMD build file name ext from cjs to js.
+
 ## 0.4.0
 
 ### Minor Changes
