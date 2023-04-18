@@ -102,11 +102,9 @@ function parseMask(mask = [], tokens) {
 }
 
 export default {
-  mounted: (el, binding, vNode) => {
+  mounted: (el, binding) => {
     const input =
       el instanceof HTMLInputElement ? el : el.querySelector('input');
-    const initialVal =
-      el instanceof HTMLInputElement ? input.value : vNode.ctx.props.modelValue;
     const options = {
       maskPattern: parseMask(binding.value.mask, {
         ...tokens,
@@ -153,7 +151,7 @@ export default {
     }
 
     // Init with placeholders
-    setInputVal(load(initialVal, options.maskPattern));
+    setInputVal(load(input.value, options.maskPattern));
 
     function setCursorPos(e, start, end) {
       let pos = input.value.indexOf(maskChar);

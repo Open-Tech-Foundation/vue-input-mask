@@ -33,6 +33,7 @@
             </td>
             <td>
               <el-input
+                v-test
                 v-model="state.date"
                 v-mask="{ mask: '##/##/####' }"
               ></el-input>
@@ -117,6 +118,11 @@
       };
       const app = Vue.createApp(App);
       app.use(ElementPlus);
+      app.directive("test", {
+        mounted: (el, binding, vNode) => {
+          console.log(el, binding, vNode);
+        },
+      });
       app.directive("mask", VueInputMask.vMask);
       app.mount("#app");
     </script>

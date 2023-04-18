@@ -5,6 +5,7 @@ import { vMask } from "../../../packages/vue-input-mask/src";
 const state = reactive({
   numbers: "1 23",
   creditCard: "1234",
+  creditCard2: ''
 });
 </script>
 
@@ -28,14 +29,13 @@ const state = reactive({
           <td>
             <input v-model="state.numbers" v-mask="{ mask: '# # # # #' }" />
           </td>
-          <td>
-            Mask: # # # # #
-          </td>
+          <td>Mask: # # # # #</td>
         </tr>
         <tr>
           <td>
             <v-text-field
               placeholder="Please input"
+              v-model="state.creditCard"
               v-mask="{ mask: '#### #### #### ####' }"
             />
           </td>
@@ -48,13 +48,13 @@ const state = reactive({
           <td>
             <el-input
               placeholder="Please input"
-              v-model="state.creditCard"
+              v-model="state.creditCard2"
               v-mask="{ mask: '#### #### #### ####' }"
             />
           </td>
           <td>Mask: #### #### #### ####</td>
           <td>
-            {{ state.creditCard }}
+            {{ state.creditCard2 }}
           </td>
         </tr>
       </tbody>
