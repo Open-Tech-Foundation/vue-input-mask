@@ -25,7 +25,7 @@ importers:
 
   apps/website:
     specifiers:
-      '@opentf/vue-input-mask': ^0.6.0
+      '@opentf/vue-input-mask': ^0.7.0
       sandpack-vue3: ^3.1.0
       vitepress: 1.0.0-alpha.65
     dependencies:
