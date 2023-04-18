@@ -14,9 +14,11 @@ importers:
       element-plus: latest
       vite: ^4.2.0
       vue: ^3.2.47
+      vuetify: ^3.1.14
     dependencies:
       element-plus: 2.3.3_vue@3.2.47
       vue: 3.2.47
+      vuetify: 3.1.14_vue@3.2.47
     devDependencies:
       '@vitejs/plugin-vue': 4.1.0_vite@4.2.1+vue@3.2.47
       vite: 4.2.1
@@ -27,7 +29,7 @@ importers:
       sandpack-vue3: ^3.1.0
       vitepress: 1.0.0-alpha.65
     dependencies:
-      '@opentf/vue-input-mask': 0.5.0
+      '@opentf/vue-input-mask': link:../../packages/vue-input-mask
       sandpack-vue3: 3.1.0
     devDependencies:
       vitepress: 1.0.0-alpha.65
@@ -940,13 +942,6 @@ packages:
   /@opentf/utils/0.16.0:
     resolution: {integrity: sha512-//rD8EDEu21x5ulXD/vdmWBNgt7WUb8yFAN/gAADuxJ8Tdittom9ZFmt7ucentbvZC8G70JjX57/7zCZWto3Pg==}
     engines: {node: ^14.17.0 || >=16.0.0}
-    dev: false
-
-  /@opentf/vue-input-mask/0.5.0:
-    resolution: {integrity: sha512-JfaUfzgD8tivNo8zWuusR6n/YDygtP+ZLpDNujvN5tctcXCGHasruIZK6jEmpNAhfNGwhaFsTm1JIRFaqQ4rew==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@opentf/utils': 0.16.0
     dev: false
 
   /@stitches/core/1.2.8:
@@ -4046,6 +4041,25 @@ packages:
       '@vue/runtime-dom': 3.2.47
       '@vue/server-renderer': 3.2.47_vue@3.2.47
       '@vue/shared': 3.2.47
+
+  /vuetify/3.1.14_vue@3.2.47:
+    resolution: {integrity: sha512-KpJH7CDyDwLjfLUkKgmijZ7WMBscuGTGKeO5pomerEWQiZ9X9bjHJTXdycqFX60QSl3AkrJeSIWW/l8nkxoslw==}
+    engines: {node: ^12.20 || >=14.13}
+    peerDependencies:
+      vite-plugin-vuetify: ^1.0.0-alpha.12
+      vue: ^3.2.0
+      vue-i18n: ^9.0.0
+      webpack-plugin-vuetify: ^2.0.0-alpha.11
+    peerDependenciesMeta:
+      vite-plugin-vuetify:
+        optional: true
+      vue-i18n:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
+    dependencies:
+      vue: 3.2.47
+    dev: false
 
   /w3c-keyname/2.2.6:
     resolution: {integrity: sha512-f+fciywl1SJEniZHD6H+kUO8gOnwIr7f4ijKA6+ZvJFjeGi1r4PDLl53Ayud9O/rk64RqgoQine0feoeOU0kXg==}

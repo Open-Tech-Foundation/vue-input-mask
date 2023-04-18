@@ -9,8 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "element-plus": "latest",
     "vue": "^3.2.47",
-    "element-plus": "latest"
+    "vuetify": "^3.1.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

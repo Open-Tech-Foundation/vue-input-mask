@@ -11,6 +11,34 @@ const tokens = {
 
 const maskChar = '_';
 
+function load(val = '', maskPattern) {
+  let str = '';
+  let valCount = 0;
+  for (let i = 0; i < maskPattern.length; i++) {
+    let char = val[valCount];
+    const token = maskPattern[i];
+
+    if (typeof token === 'string') {
+      str += token;
+      continue;
+    }
+
+    if (!char || char === maskChar) {
+      str += maskChar;
+      continue;
+    }
+
+    const regExp = new RegExp(token.pattern);
+    if (token.transform) {
+      char = token.transform(char);
+    }
+    str += regExp.test(char) ? char : maskChar;
+    valCount++;
+  }
+
+  return str;
+}
+
 function mask(newVal, maskPattern) {
   let str = '';
   for (let i = 0; i < maskPattern.length; i++) {
@@ -74,9 +102,11 @@ function parseMask(mask = [], tokens) {
 }
 
 export default {
-  mounted: (el, binding) => {
+  mounted: (el, binding, vNode) => {
     const input =
       el instanceof HTMLInputElement ? el : el.querySelector('input');
+    const initialVal =
+      el instanceof HTMLInputElement ? input.value : vNode.ctx.props.modelValue;
     const options = {
       maskPattern: parseMask(binding.value.mask, {
         ...tokens,
@@ -123,7 +153,7 @@ export default {
     }
 
     // Init with placeholders
-    setInputVal(mask(input.value, options.maskPattern));
+    setInputVal(load(initialVal, options.maskPattern));
 
     function setCursorPos(e, start, end) {
       let pos = input.value.indexOf(maskChar);

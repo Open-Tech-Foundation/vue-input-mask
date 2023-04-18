@@ -6,11 +6,13 @@
 
 [![Build](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml/badge.svg)](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml)
 
+![](https://raw.githubusercontent.com/Open-Tech-Foundation/vue-input-mask/main/apps/website/public/demo.png)
+
 </div>
 
 > The input mask directive for Vue.js.
 
-[DEMO](https://vue-input-mask.pages.dev/demo/native-input/)
+## [View Demo](https://vue-input-mask.pages.dev/demo/native-input/)
 
 ## Features
 
@@ -56,7 +58,7 @@ import { vMask } from "@opentf/vue-input-mask";
 
 ## Documentation
 
-[https://vue-input-mask.pages.dev/](https://vue-input-mask.pages.dev/)
+Please visit [https://vue-input-mask.pages.dev](https://vue-input-mask.pages.dev/) for full documentation.
 
 ## License
 

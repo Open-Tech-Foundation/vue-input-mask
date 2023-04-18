@@ -100,13 +100,13 @@ describe('vMask directive', () => {
     cy.get('input').type('1a2Bf');
     cy.get('input').should('have.value', '#1A2BF');
   });
-  it.only('initial value', () => {
+  it('initial value', () => {
     cy.mount(InputMask, {
       props: {
-        mask: '#####',
+        mask: '# # # # #',
         value: '123',
       },
     });
-    cy.get('input').should('have.value', '123__');
+    cy.get('input').should('have.value', '1 2 3 _ _');
   });
 });
