@@ -6,7 +6,7 @@ hero:
   name: "Vue Input Mask"
   text: "The input mask directive for Vue.js"
   image:
-    src: /image.png
+    src: /demo.png
     alt: Demo
   actions:
     - theme: brand
