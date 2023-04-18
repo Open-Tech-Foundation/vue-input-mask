@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.6.0
+
+### Minor Changes
+
+- 9bfd872: Fixed initial value masking
+
 ## 0.5.0
 
 ### Minor Changes
