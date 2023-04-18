@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.2.47",
-    "vuetify": "^3.1.13"
+    "element-plus": "latest"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

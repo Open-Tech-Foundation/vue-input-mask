@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@3.1.14/dist/vuetify.min.css"
+    />
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.1.14/dist/vuetify.min.js"></script>
+    <script src="https://unpkg.com/@opentf/vue-input-mask"></script>
+    <style>
+      #app {
+        padding: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <v-text-field
+          label="Date"
+          density="compact"
+          variant="outlined"
+          v-mask="{ mask: '##/##/####' }"
+        />
+      </div>
+      <div>
+        <v-text-field
+          label="Time"
+          density="compact"
+          variant="outlined"
+          v-mask="{
+            mask: '##:## @M',
+            tokens: {
+              '@': {
+                pattern: '[AP]',
+                transform: (v) => v.toLocaleUpperCase(),
+              },
+            },
+          }"
+        />
+      </div>
+      <div>
+        <v-text-field
+          label="Credit Card"
+          density="compact"
+          variant="outlined"
+          v-mask="{ mask: '#### #### #### ####' }"
+        />
+      </div>
+      <div>
+        <v-text-field
+          label="Hex Color"
+          density="compact"
+          v-mask="{
+              mask: '\\#FFFFFF',
+              tokens: {
+                F: {
+                  pattern: /[0-9a-fA-F]/,
+                  transform: (v) => v.toLocaleUpperCase(),
+                },
+              },
+            }"
+        />
+      </div>
+      <div>
+        <v-text-field
+          label="US Phone"
+          density="compact"
+          variant="outlined"
+          v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
+        />
+      </div>
+      <div>
+        <v-alert color="info" density="compact" variant="outlined">
+          Raw: {{ raw }}
+        </v-alert>
+      </div>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            raw: "12345",
+            state: {
+              creditCard: "1234",
+            },
+          };
+        },
+      };
+      const app = Vue.createApp(App);
+      const { createVuetify } = Vuetify;
+      const vuetify = createVuetify();
+      app.use(vuetify);
+      app.directive("mask", VueInputMask.vMask);
+      app.mount("#app");
+    </script>
+  </body>
+</html>

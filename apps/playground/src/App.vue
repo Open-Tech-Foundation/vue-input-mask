@@ -3,16 +3,7 @@ import { reactive } from "vue";
 import { vMask } from "../../../packages/vue-input-mask/src";
 
 const state = reactive({
-  vuetify: "123",
-  numberOnly: "1",
   creditCard: "",
-  stringOnly: "",
-  date: "",
-  time: "",
-  upper: "",
-  usPhone: "",
-  price: "",
-  hex: "",
 });
 
 const raw = reactive({
@@ -38,105 +29,16 @@ const raw = reactive({
       <tbody>
         <tr>
           <td>
-            <v-text-field
-              v-mask="{
-                mask: '\\#FFFFFF',
-                tokens: {
-                  F: {
-                    pattern: '[0-9a-fA-F]',
-                    transform: (v) => v.toLocaleUpperCase(),
-                  },
-                },
-              }"
-              v-model="state.hex"
-            ></v-text-field>
-          </td>
-          <td>Mask: \\#FFFFFF</td>
-          <td>Value: {{ state.hex }}</td>
-        </tr>
-        <tr>
-          <td>
-            <v-text-field
-              v-mask="{
-                mask: '\\$ ##.##',
-                raw: (v) => (raw.price = v),
-              }"
-              label="Price"
-              variant="outlined"
-              v-model="state.price"
-            ></v-text-field>
-          </td>
-          <td>Mask: $ ##.##</td>
-          <td>Value: {{ state.price }}</td>
-          <td>Raw: {{ raw.price }}</td>
-        </tr>
-        <tr>
-          <td>
-            <v-text-field
-              v-mask="{
-                mask: '+1 (###) ###-####',
-                raw: (v) => (raw.usPhone = v),
-              }"
-              label="Label"
-              variant="outlined"
-              v-model="state.usPhone"
-            ></v-text-field>
-          </td>
-          <td>Mask: +1 (###) ###-####</td>
-          <td>Value: {{ state.usPhone }}</td>
-          <td>Raw: {{ raw.usPhone }}</td>
-        </tr>
-        <tr>
-          <td>
-            <v-text-field
-              v-mask="{ mask: 'AA' }"
-              label="Label"
-              variant="outlined"
-              v-model="state.upper"
-            ></v-text-field>
-          </td>
-          <td>Mask: AA</td>
-          <td>Value: {{ state.upper }}</td>
-        </tr>
-        <tr>
-          <td>
-            <v-text-field
-              v-mask="{ mask: '#####' }"
-              label="Label"
-              variant="outlined"
-              v-model="state.vuetify"
-            ></v-text-field>
-          </td>
-          <td>Mask: #####</td>
-          <td>Value: {{ state.vuetify }}</td>
-        </tr>
-        <tr>
-          <td>
-            <input v-mask="{ mask: '####' }" v-model="state.numberOnly" />
-          </td>
-          <td>Mask: ####</td>
-          <td>Value: {{ state.numberOnly }}</td>
-        </tr>
-        <tr>
-          <td>
-            <input v-mask="'#### #### #### ####'" v-model="state.creditCard" />
+            <el-input
+              placeholder="Please input"
+              v-model="state.creditCard"
+              v-mask="{ mask: '#### #### #### ####' }"
+            />
           </td>
           <td>Mask: #### #### #### ####</td>
-          <td>Value: {{ state.creditCard }}</td>
-        </tr>
-        <tr>
           <td>
-            <input v-mask="'$$$$$'" v-model="state.stringOnly" />
+            {{ state.creditCard }}
           </td>
-          <td>Mask: $$$$$</td>
-          <td>Value: {{ state.stringOnly }}</td>
-        </tr>
-        <tr>
-          <td>
-            <input v-mask="'##/##/####'" v-model="state.date" />
-          </td>
-          <td>Mask: ##/##/####</td>
-          <td>Value: {{ state.date }}</td>
         </tr>
       </tbody>
     </table>

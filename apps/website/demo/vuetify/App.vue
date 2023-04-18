@@ -1,15 +1,8 @@
-<script>
+<script setup>
+import { ref } from "vue";
 import { vMask } from "@opentf/vue-input-mask";
-export default {
-  data() {
-    return {
-      raw: "",
-    };
-  },
-  directives: {
-    mask: vMask,
-  },
-};
+
+const raw = ref("");
 </script>
 
 <template>

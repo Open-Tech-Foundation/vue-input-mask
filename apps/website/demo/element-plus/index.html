@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- import CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-plus/dist/index.css"
+    />
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/@opentf/vue-input-mask"></script>
+
+    <title>Element Plus demo</title>
+    <style>
+      td:first-child {
+        text-align: right;
+      }
+
+      td {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <label>Date</label>
+            </td>
+            <td>
+              <el-input
+                v-model="state.date"
+                v-mask="{ mask: '##/##/####' }"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Time</label>
+            </td>
+            <td>
+              <el-input
+                v-model="state.time"
+                v-mask="{
+                  mask: '##:## @M',
+                  tokens: {
+                    '@': {
+                      pattern: '[AP]',
+                      transform: (v) => v.toLocaleUpperCase(),
+                    },
+                  },
+                }"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Credit Card</label>
+            </td>
+            <td>
+              <el-input
+                v-mask="{ mask: '#### #### #### ####' }"
+                v-model="state.creditCard"
+              ></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>US Phone</label>
+            </td>
+            <td>
+              <el-input
+                v-model="state.phone"
+                v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
+              ></el-input>
+            </td>
+            <td>
+              <el-text class="mx-1" type="primary">Raw: {{ raw }}</el-text>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Hex Color</label>
+            </td>
+            <td>
+              <el-input
+                v-model="state.hex"
+                v-mask="{
+                  mask: '\\#FFFFFF',
+                  tokens: {
+                    F: {
+                      pattern: /[0-9a-fA-F]/,
+                      transform: (v) => v.toLocaleUpperCase(),
+                    },
+                  },
+                }"
+              ></el-input>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            raw: "12345",
+            state: {
+              creditCard: "1234",
+            },
+          };
+        },
+      };
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.directive("mask", VueInputMask.vMask);
+      app.mount("#app");
+    </script>
+  </body>
+</html>

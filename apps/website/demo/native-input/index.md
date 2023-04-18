@@ -1,5 +1,6 @@
 <script setup>
   import { SandpackProvider, SandpackLayout, SandpackPreview, SandpackCodeEditor } from 'sandpack-vue3';
+  import Index from './index.html?raw'
   import App from './App.vue?raw'
 </script>
 
@@ -16,13 +17,8 @@
 
 <div id="embed">
  <SandpackProvider
-    template="vite-vue"
-    :files="{'/src/App.vue': App}" :customSetup="{ 
-        dependencies: { 
-          '@opentf/vue-input-mask': 'latest',
-          'vuetify': 'latest'
-        }
-      }"
+    template="static"
+    :files="{'/index.html': Index}"
   >
     <SandpackLayout :options="{
         showNavigator: true,

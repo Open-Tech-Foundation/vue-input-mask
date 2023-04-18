@@ -1,28 +1,13 @@
-<script>
+<script setup>
+import { ref } from "vue";
 import { vMask } from "@opentf/vue-input-mask";
-export default {
-  data() {
-    return {
-      raw: "",
-    };
-  },
-  directives: {
-    mask: vMask,
-  },
-};
+
+const raw = ref("");
 </script>
 
 <template>
   <table>
     <tbody>
-      <tr>
-        <td>
-          <label>Credit Card</label>
-        </td>
-        <td>
-          <input v-mask="{ mask: '#### #### #### ####' }" />
-        </td>
-      </tr>
       <tr>
         <td>
           <label>Date</label>
@@ -37,7 +22,7 @@ export default {
         </td>
         <td>
           <input
-            v-mask="{
+          v-mask="{
               mask: '##:## @M',
               tokens: {
                 '@': {
@@ -47,6 +32,14 @@ export default {
               },
             }"
           />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Credit Card</label>
+        </td>
+        <td>
+          <input v-mask="{ mask: '#### #### #### ####' }" />
         </td>
       </tr>
       <tr>

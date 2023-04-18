@@ -14,11 +14,18 @@ export default defineConfig({
 
     sidebar: [
       {
-        items: [{ text: "Getting Started", link: "/get-started" }, { text: "Guide", link: "/guide" }],
+        items: [
+          { text: "Getting Started", link: "/get-started" },
+          { text: "Guide", link: "/guide" },
+        ],
       },
       {
         text: "Demo",
-        items: [{ text: "Native Input", link: "/demo/native-input/" }, { text: "Vuetify", link: "/demo/vuetify/" }],
+        items: [
+          { text: "Native Input", link: "/demo/native-input/" },
+          { text: "Vuetify", link: "/demo/vuetify/" },
+          { text: "Element Plus", link: "/demo/element-plus/" },
+        ],
       },
     ],
 

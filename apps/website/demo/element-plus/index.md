@@ -1,7 +1,6 @@
 <script setup>
   import { SandpackProvider, SandpackLayout, SandpackPreview } from 'sandpack-vue3';
   import Index from './index.html?raw'
-  import App from './App.vue?raw'
 </script>
 
 <style>
@@ -13,23 +12,22 @@
   }
 </style>
 
-# <img style="vertical-align: middle; display: inline;" src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-dark.svg" width="50" height="50" /> Vuetify
+# <img style="vertical-align: middle; display: inline; height: 50px" src="./element-plus-logo.svg" />
 
 <div id="embed">
  <SandpackProvider
     template="static"
-    :files="{'/index.html': Index}"
-    :options="{
+    :files="{'/index.html': Index}">
+    <SandpackLayout :options="{
         showNavigator: true,
-      }"  
-  >
-    <SandpackLayout>
-      <SandpackPreview style="height: 500px" />
+      }">
+      <SandpackPreview style="height: 500px" :options="{
+        showNavigator: true,
+      }" />
     </SandpackLayout>
-  </SandpackProvider>     
+  </SandpackProvider>
 </div>
 
-
 ::: details View Source
-<<<@/demo/vuetify/App.vue
+<<<@/demo/element-plus/App.vue
 :::

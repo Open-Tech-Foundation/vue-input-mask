@@ -1,103 +1,112 @@
-import InputMask from "./InputMask.vue";
+import InputMask from './InputMask.vue';
 
-describe("vMask directive", () => {
-  it("renders", () => {
+describe('vMask directive', () => {
+  it('renders', () => {
     cy.mount(InputMask);
   });
-  it("renders the input with a default mask char", () => {
-    cy.mount(InputMask, { props: { mask: "#" } });
-    cy.get("input").should("have.value", "_");
+  it('renders the input with a default mask char', () => {
+    cy.mount(InputMask, { props: { mask: '#' } });
+    cy.get('input').should('have.value', '_');
   });
-  it("renders the input with multiple default mask chars", () => {
-    cy.mount(InputMask, { props: { mask: "###" } });
-    cy.get("input").should("have.value", "___");
+  it('renders the input with multiple default mask chars', () => {
+    cy.mount(InputMask, { props: { mask: '###' } });
+    cy.get('input').should('have.value', '___');
   });
-  it("accepts only numbers", () => {
-    cy.mount(InputMask, { props: { mask: "#####" } });
-    cy.get("input").type("{home}abcde");
-    cy.get("input").should("have.value", "_____");
-    cy.get("input").type("{home}12345");
-    cy.get("input").should("have.value", "12345");
+  it('accepts only numbers', () => {
+    cy.mount(InputMask, { props: { mask: '#####' } });
+    cy.get('input').type('{home}abcde');
+    cy.get('input').should('have.value', '_____');
+    cy.get('input').type('{home}12345');
+    cy.get('input').should('have.value', '12345');
   });
-  it("accepts only chars", () => {
-    cy.mount(InputMask, { props: { mask: "$$$" } });
-    cy.get("input").should("have.value", "___");
-    cy.get("input").type("{home}123");
-    cy.get("input").should("have.value", "___");
-    cy.get("input").type("{home}abc");
-    cy.get("input").should("have.value", "abc");
+  it('accepts only chars', () => {
+    cy.mount(InputMask, { props: { mask: '$$$' } });
+    cy.get('input').should('have.value', '___');
+    cy.get('input').type('{home}123');
+    cy.get('input').should('have.value', '___');
+    cy.get('input').type('{home}abc');
+    cy.get('input').should('have.value', 'abc');
   });
-  it("accepts both case chars", () => {
-    cy.mount(InputMask, { props: { mask: "$$$$" } });
-    cy.get("input").should("have.value", "____");
-    cy.get("input").type("{home}abAB");
-    cy.get("input").should("have.value", "abAB");
+  it('accepts both case chars', () => {
+    cy.mount(InputMask, { props: { mask: '$$$$' } });
+    cy.get('input').should('have.value', '____');
+    cy.get('input').type('{home}abAB');
+    cy.get('input').should('have.value', 'abAB');
   });
-  it("accepts both numbers & chars", () => {
-    cy.mount(InputMask, { props: { mask: "*****" } });
-    cy.get("input").should("have.value", "_____");
-    cy.get("input").type("{home}M5P2g");
-    cy.get("input").should("have.value", "M5P2g");
+  it('accepts both numbers & chars', () => {
+    cy.mount(InputMask, { props: { mask: '*****' } });
+    cy.get('input').should('have.value', '_____');
+    cy.get('input').type('{home}M5P2g');
+    cy.get('input').should('have.value', 'M5P2g');
   });
-  it("transforms to upper case letters", () => {
-    cy.mount(InputMask, { props: { mask: "AA" } });
-    cy.get("input").should("have.value", "__");
-    cy.get("input").type("{home}ab");
-    cy.get("input").should("have.value", "AB");
+  it('transforms to upper case letters', () => {
+    cy.mount(InputMask, { props: { mask: 'AA' } });
+    cy.get('input').should('have.value', '__');
+    cy.get('input').type('{home}ab');
+    cy.get('input').should('have.value', 'AB');
   });
-  it("transforms to lower case letters", () => {
-    cy.mount(InputMask, { props: { mask: "aaa" } });
-    cy.get("input").should("have.value", "___");
-    cy.get("input").type("{home}AbC");
-    cy.get("input").should("have.value", "abc");
+  it('transforms to lower case letters', () => {
+    cy.mount(InputMask, { props: { mask: 'aaa' } });
+    cy.get('input').should('have.value', '___');
+    cy.get('input').type('{home}AbC');
+    cy.get('input').should('have.value', 'abc');
   });
-  it("escapes the $ token", () => {
-    cy.mount(InputMask, { props: { mask: "\\$ ##.##" } });
-    cy.get("input").should("have.value", "$ __.__");
-    cy.get("input").type("1234");
-    cy.get("input").should("have.value", "$ 12.34");
+  it('escapes the $ token', () => {
+    cy.mount(InputMask, { props: { mask: '\\$ ##.##' } });
+    cy.get('input').should('have.value', '$ __.__');
+    cy.get('input').type('1234');
+    cy.get('input').should('have.value', '$ 12.34');
   });
-  it("escapes the * token", () => {
-    cy.mount(InputMask, { props: { mask: "*** # \\* #" } });
-    cy.get("input").should("have.value", "___ _ * _");
-    cy.get("input").type("Mul12");
-    cy.get("input").should("have.value", "Mul 1 * 2");
+  it('escapes the * token', () => {
+    cy.mount(InputMask, { props: { mask: '*** # \\* #' } });
+    cy.get('input').should('have.value', '___ _ * _');
+    cy.get('input').type('Mul12');
+    cy.get('input').should('have.value', 'Mul 1 * 2');
   });
-  it("escapes the #, A, a token", () => {
-    cy.mount(InputMask, { props: { mask: "\\# # \\A A \\a a" } });
-    cy.get("input").should("have.value", "# _ A _ a _");
-    cy.get("input").type("1gB");
-    cy.get("input").should("have.value", "# 1 A G a b");
+  it('escapes the #, A, a token', () => {
+    cy.mount(InputMask, { props: { mask: '\\# # \\A A \\a a' } });
+    cy.get('input').should('have.value', '# _ A _ a _');
+    cy.get('input').type('1gB');
+    cy.get('input').should('have.value', '# 1 A G a b');
   });
-  it("regexp", () => {
-    cy.mount(InputMask, { props: { mask: "## : ## {[AP]}M" } });
-    cy.get("input").should("have.value", "__ : __ _M");
-    cy.get("input").type("1234B");
-    cy.get("input").should("have.value", "12 : 34 _M");
-    cy.get("input").type("{home}1234A");
-    cy.get("input").should("have.value", "12 : 34 AM");
+  it('regexp', () => {
+    cy.mount(InputMask, { props: { mask: '## : ## {[AP]}M' } });
+    cy.get('input').should('have.value', '__ : __ _M');
+    cy.get('input').type('1234B');
+    cy.get('input').should('have.value', '12 : 34 _M');
+    cy.get('input').type('{home}1234A');
+    cy.get('input').should('have.value', '12 : 34 AM');
   });
-  it("raw", () => {
-    cy.mount(InputMask, { props: { mask: "##:##" } });
-    cy.get("input").should("have.value", "__:__");
-    cy.get("input").type("1234");
-    cy.get("input").should("have.value", "12:34");
-    cy.get("p").should("have.text", "1234");
+  it('raw', () => {
+    cy.mount(InputMask, { props: { mask: '##:##' } });
+    cy.get('input').should('have.value', '__:__');
+    cy.get('input').type('1234');
+    cy.get('input').should('have.value', '12:34');
+    cy.get('p').should('have.text', '1234');
   });
-  it("custom tokens", () => {
+  it('custom tokens', () => {
     cy.mount(InputMask, {
       props: {
-        mask: "\\#FFFFF",
+        mask: '\\#FFFFF',
         tokens: {
           F: {
-            pattern: "[0-9a-fA-F]",
+            pattern: '[0-9a-fA-F]',
             transform: (v) => v.toLocaleUpperCase(),
           },
         },
       },
     });
-    cy.get("input").should("have.value", "#_____");
-    cy.get("input").type("1a2Bf");
-    cy.get("input").should("have.value", "#1A2BF");
+    cy.get('input').should('have.value', '#_____');
+    cy.get('input').type('1a2Bf');
+    cy.get('input').should('have.value', '#1A2BF');
+  });
+  it.only('initial value', () => {
+    cy.mount(InputMask, {
+      props: {
+        mask: '#####',
+        value: '123',
+      },
+    });
+    cy.get('input').should('have.value', '123__');
   });
 });
