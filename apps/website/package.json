@@ -9,7 +9,8 @@
     "vitepress": "1.0.0-alpha.65"
   },
   "dependencies": {
-    "@opentf/vue-input-mask": "^0.5.0",
+    "@opentf/vue-input-mask": "^0.6.0",
     "sandpack-vue3": "^3.1.0"
-  }
+  },
+  "version": null
 }
