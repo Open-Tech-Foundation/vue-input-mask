@@ -4,6 +4,20 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Vue Input Mask",
   description: "The input mask directive for Vue.js",
+  head: [
+    [
+      "script",
+      {
+        async: true,
+        src: "https://www.googletagmanager.com/gtag/js?id=G-CZ5DWZQ6RJ",
+      },
+    ],
+    [
+      "script",
+      {},
+      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-CZ5DWZQ6RJ');",
+    ],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     localSearch: true,
