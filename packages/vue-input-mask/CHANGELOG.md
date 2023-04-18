@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.7.0
+
+### Minor Changes
+
+- 0e4e71a: Reverted the vNode ctx get value
+
 ## 0.6.0
 
 ### Minor Changes
