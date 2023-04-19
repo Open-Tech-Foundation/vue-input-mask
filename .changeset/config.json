@@ -7,6 +7,7 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["/apps/**"],
-  "privatePackages": false
+  "ignore": ["playground", "website"],
+  "privatePackages": false,
+  "bumpVersionsWithWorkspaceProtocolOnly": true
 }
