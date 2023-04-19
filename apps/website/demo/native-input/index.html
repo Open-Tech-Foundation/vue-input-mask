@@ -62,7 +62,7 @@
             </td>
             <td>
               <input
-                v-model="state.phone"
+                v-model="state.usPhone"
                 v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
               />
             </td>
@@ -94,9 +94,13 @@
       const App = {
         data() {
           return {
-            raw: "12345",
+            raw: "",
             state: {
-              creditCard: "1234",
+              date: "",
+              time: "",
+              creditCard: "",
+              usPhone: "0123456789",
+              hex: "",
             },
           };
         },

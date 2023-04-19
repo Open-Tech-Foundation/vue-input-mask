@@ -4,11 +4,11 @@ import { vMask } from "@opentf/vue-input-mask";
 
 const raw = ref("");
 const state = reactive({
-  creditCard: "asdf",
   date: "",
   time: "",
-  phone: "",
-  hex: "a4sdf54",
+  creditCard: "",
+  usPhone: "0123456789",
+  hex: "",
 });
 </script>
 
@@ -16,18 +16,6 @@ const state = reactive({
   <div id="app">
     <table>
       <tbody>
-        <tr>
-          <td>
-            <label>Credit Card</label>
-          </td>
-          <td>
-            <el-input
-              v-mask="{ mask: '#### #### #### ####' }"
-              v-model="state.creditCard"
-            ></el-input>
-          </td>
-          <td>Value: {{ state.creditCard }}</td>
-        </tr>
         <tr>
           <td>
             <label>Date</label>
@@ -60,15 +48,28 @@ const state = reactive({
         </tr>
         <tr>
           <td>
+            <label>Credit Card</label>
+          </td>
+          <td>
+            <el-input
+              v-mask="{ mask: '#### #### #### ####' }"
+              v-model="state.creditCard"
+            ></el-input>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <label>US Phone</label>
           </td>
           <td>
             <el-input
-              v-model="state.phone"
+              v-model="state.usPhone"
               v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
             ></el-input>
           </td>
-          <td>Raw: {{ raw }}</td>
+          <td>
+            <el-text class="mx-1" type="primary">Raw: {{ raw }}</el-text>
+          </td>
         </tr>
         <tr>
           <td>

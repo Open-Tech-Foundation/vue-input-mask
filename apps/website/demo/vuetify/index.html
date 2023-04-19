@@ -22,6 +22,7 @@
           label="Date"
           density="compact"
           variant="outlined"
+          v-model="state.date"
           v-mask="{ mask: '##/##/####' }"
         />
       </div>
@@ -30,6 +31,7 @@
           label="Time"
           density="compact"
           variant="outlined"
+          v-model="state.time"
           v-mask="{
             mask: '##:## @M',
             tokens: {
@@ -46,6 +48,7 @@
           label="Credit Card"
           density="compact"
           variant="outlined"
+          v-model="state.creditCard"
           v-mask="{ mask: '#### #### #### ####' }"
         />
       </div>
@@ -53,6 +56,7 @@
         <v-text-field
           label="Hex Color"
           density="compact"
+          v-model="state.hex"
           v-mask="{
               mask: '\\#FFFFFF',
               tokens: {
@@ -69,6 +73,7 @@
           label="US Phone"
           density="compact"
           variant="outlined"
+          v-model="state.usPhone"
           v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
         />
       </div>
@@ -82,9 +87,13 @@
       const App = {
         data() {
           return {
-            raw: "12345",
+            raw: "",
             state: {
-              creditCard: "1234",
+              date: "",
+              time: "",
+              creditCard: "",
+              usPhone: "0123456789",
+              hex: "",
             },
           };
         },

@@ -1,11 +1,13 @@
 <script setup>
 import { reactive } from "vue";
 import { vMask } from "../../../packages/vue-input-mask/src";
+import CustomInput from "./CustomInput.vue";
 
 const state = reactive({
-  numbers: "1 23",
+  customInput: '888',
+  numbers: "1234",
   creditCard: "1234",
-  creditCard2: ''
+  creditCard2: "12345678",
 });
 </script>
 
@@ -25,6 +27,11 @@ const state = reactive({
     </pre>
     <table>
       <tbody>
+        <tr>
+          <td>
+            <custom-input v-model="state.customInput" v-mask="{ mask: '###'}"></custom-input>
+          </td>
+        </tr>
         <tr>
           <td>
             <input v-model="state.numbers" v-mask="{ mask: '# # # # #' }" />

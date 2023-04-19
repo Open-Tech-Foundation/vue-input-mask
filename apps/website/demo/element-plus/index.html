@@ -33,7 +33,6 @@
             </td>
             <td>
               <el-input
-                v-test
                 v-model="state.date"
                 v-mask="{ mask: '##/##/####' }"
               ></el-input>
@@ -75,7 +74,7 @@
             </td>
             <td>
               <el-input
-                v-model="state.phone"
+                v-model="state.usPhone"
                 v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
               ></el-input>
             </td>
@@ -109,20 +108,19 @@
       const App = {
         data() {
           return {
-            raw: "12345",
+            raw: "",
             state: {
-              creditCard: "1234",
+              date: "",
+              time: "",
+              creditCard: "",
+              usPhone: "0123456789",
+              hex: "",
             },
           };
         },
       };
       const app = Vue.createApp(App);
       app.use(ElementPlus);
-      app.directive("test", {
-        mounted: (el, binding, vNode) => {
-          console.log(el, binding, vNode);
-        },
-      });
       app.directive("mask", VueInputMask.vMask);
       app.mount("#app");
     </script>

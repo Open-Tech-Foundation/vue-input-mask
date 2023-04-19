@@ -1,8 +1,15 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { vMask } from "@opentf/vue-input-mask";
 
 const raw = ref("");
+const state = reactive({
+  date: "",
+  time: "",
+  creditCard: "",
+  usPhone: "0123456789",
+  hex: "",
+});
 </script>
 
 <template>
@@ -13,7 +20,7 @@ const raw = ref("");
           <label>Date</label>
         </td>
         <td>
-          <input v-mask="{ mask: '##/##/####' }" />
+          <input v-model="state.date" v-mask="{ mask: '##/##/####' }" />
         </td>
       </tr>
       <tr>
@@ -22,7 +29,8 @@ const raw = ref("");
         </td>
         <td>
           <input
-          v-mask="{
+            v-model="state.time"
+            v-mask="{
               mask: '##:## @M',
               tokens: {
                 '@': {
@@ -39,7 +47,10 @@ const raw = ref("");
           <label>Credit Card</label>
         </td>
         <td>
-          <input v-mask="{ mask: '#### #### #### ####' }" />
+          <input
+            v-mask="{ mask: '#### #### #### ####' }"
+            v-model="state.creditCard"
+          />
         </td>
       </tr>
       <tr>
@@ -48,6 +59,7 @@ const raw = ref("");
         </td>
         <td>
           <input
+            v-model="state.usPhone"
             v-mask="{ mask: '+1 (###) ###-####', raw: (v) => (raw = v) }"
           />
         </td>
@@ -59,6 +71,7 @@ const raw = ref("");
         </td>
         <td>
           <input
+            v-model="state.hex"
             v-mask="{
               mask: '\\#FFFFFF',
               tokens: {

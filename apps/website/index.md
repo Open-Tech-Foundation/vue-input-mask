@@ -23,4 +23,6 @@ features:
     details: You can define your own regular expression to validate the input.
   - title: Custom Tokens
     details: Extend default tokens with your own tokens, including validation & transformation.
+  - title: Raw Value
+    details: You can get raw/unmasked values from the callback function.  
 ---
