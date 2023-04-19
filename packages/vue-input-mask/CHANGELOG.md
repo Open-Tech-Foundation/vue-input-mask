@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.8.0
+
+### Minor Changes
+
+- a40f2c8: Fixed initial value masking for custom comp
+
 ## 0.7.0
 
 ### Minor Changes
