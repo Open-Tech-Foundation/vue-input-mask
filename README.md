@@ -56,6 +56,18 @@ import { vMask } from "@opentf/vue-input-mask";
 </template>
 ```
 
+```
+Default Tokens:
+
+#  - Number only, [0-9]
+$  - Char only, [A-Z, a-z]
+*  - Number or Char, [a-z, A-Z, 0-9]
+A  - Uppercase char [A-Z], transform: (c) => c.toLocaleUpperCase()
+a  - Lowercase char [a-z], transform: (c) => c.toLocaleLowerCase()
+\\ - Escape token, eg: \\$
+{} - Regular expression, eg: {[A-F]}
+```
+
 ## Documentation
 
 Please visit [https://vue-input-mask.pages.dev](https://vue-input-mask.pages.dev/) for full documentation.

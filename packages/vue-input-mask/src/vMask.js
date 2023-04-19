@@ -114,6 +114,11 @@ export default {
     };
     let curInputVal = '';
 
+    // Init with placeholders
+    nextTick(() => {
+      setInputVal(load(input.value, options.maskPattern));
+    });
+
     function getRawValue(val) {
       let str = '';
       for (let i = 0; i < options.maskPattern.length; i++) {
@@ -149,9 +154,6 @@ export default {
 
       return new RegExp(token.pattern).test(c);
     }
-
-    // Init with placeholders
-    setInputVal(load(input.value, options.maskPattern));
 
     function setCursorPos(e, start, end) {
       let pos = input.value.indexOf(maskChar);
