@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.8.1
+
+### Patch Changes
+
+- 3427eae: Updated readme with features
+
 ## 0.8.0
 
 ### Minor Changes
