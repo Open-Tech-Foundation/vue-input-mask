@@ -18,11 +18,13 @@
 
 - Simple API
 
-- Lightweight ~1.5 KB
+- Lightweight ~1.5 KB Gzipped
 
 - RegExp Support
 
 - Custom tokens
+
+- Get raw/unmasked values via callback fn
 
 ## Installation
 
