@@ -17,6 +17,13 @@ export default defineConfig({
       {},
       "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-CZ5DWZQ6RJ');",
     ],
+    [
+      "meta",
+      {
+        name: "msvalidate.01",
+        content: "2006B3F1BA8B3EE3AD91DA91F4877102",
+      },
+    ],
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
