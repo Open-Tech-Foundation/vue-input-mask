@@ -1,6 +1,6 @@
 {
   "name": "@opentf/vue-input-mask",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "homepage": "https://vue-input-mask.pages.dev",
   "description": "The input mask directive for Vue.js.",
   "keywords": [

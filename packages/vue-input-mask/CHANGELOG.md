@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.8.2
+
+### Patch Changes
+
+- 46eb4c8: Added demo links in readme & updated pkg keywords.
+
 ## 0.8.1
 
 ### Patch Changes
