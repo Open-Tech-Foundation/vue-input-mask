@@ -10,7 +10,10 @@
     "form",
     "phone number",
     "credit card",
-    "zip"
+    "zip",
+    "format",
+    "vuetify",
+    "element-plus"
   ],
   "type": "module",
   "main": "dist/index.umd.js",

@@ -12,7 +12,13 @@
 
 > The input mask directive for Vue.js.
 
-## [View Demo](https://vue-input-mask.pages.dev/demo/native-input/)
+## Demo
+
+- [Native Input](https://vue-input-mask.pages.dev/demo/native-input/)
+
+- [Vuetify](https://vue-input-mask.pages.dev/demo/vuetify/)
+
+- [Element Plus](https://vue-input-mask.pages.dev/demo/element-plus/)
 
 ## Features
 
