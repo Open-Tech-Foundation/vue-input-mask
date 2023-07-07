@@ -5,47 +5,48 @@ name: Build
 
 on:
   push:
-    branches: [ main ]
-    paths-ignore: 
-      - 'apps/website/**'
-      - 'apps/playground/**'
+    branches: [main]
+    paths-ignore:
+      - "apps/website/**"
+      - "apps/playground/**"
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   HUSKY: 0
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16.x, 18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Cypress install
-      uses: cypress-io/github-action@v5
-      with:
-        # just perform install
-        runTests: false
-    - run: pnpm ci
-    - name: Cypress run
-      uses: cypress-io/github-action@v5
-      with:
-        # we have already installed all dependencies above
-        install: false
-        working-directory: packages/vue-input-mask
-        cache-key: node-v${{ matrix.node }}-on-${{ runner.os }}-hash-${{ hashFiles('pnpm-lock.yaml') }}
-        component: true
-        browser: chrome
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cypress install
+        uses: cypress-io/github-action@v5
+        with:
+          # just perform install
+          runTests: false
+      - run: pnpm ci
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          # we have already installed all dependencies above
+          install: false
+          working-directory: packages/vue-input-mask
+          cache-key: node-v${{ matrix.node-version }}-on-${{ runner.os }}-hash-${{ hashFiles('pnpm-lock.yaml') }}
+          component: true
+          browser: chrome

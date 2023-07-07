@@ -42,16 +42,16 @@
   "author": "Thanga Ganapathy",
   "license": "MIT",
   "dependencies": {
-    "@opentf/utils": "^0.16.0"
+    "@opentf/utils": "^0.20.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.1.0",
-    "cypress": "^12.9.0",
-    "eslint": "^8.38.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "cypress": "^12.17.0",
+    "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.7",
-    "vite": "^4.2.0",
-    "vue": "^3.2.47"
+    "prettier": "^2.8.8",
+    "vite": "^4.4.2",
+    "vue": "^3.3.4"
   }
 }
