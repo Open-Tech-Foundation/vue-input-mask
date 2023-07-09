@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.9.1
+
+### Patch Changes
+
+- 57bfb9e: Added missing types field in pkg.
+
 ## 0.9.0
 
 ### Minor Changes
