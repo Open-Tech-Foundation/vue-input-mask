@@ -13,5 +13,5 @@ export default function isValidInput(
     );
   }
 
-  return false
+  return false;
 }

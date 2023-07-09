@@ -1,4 +1,4 @@
-import { Token } from "./types";
+import { Token } from './types';
 
 export const tokens: Record<string, Token> = {
   '#': { pattern: '[0-9]' },
