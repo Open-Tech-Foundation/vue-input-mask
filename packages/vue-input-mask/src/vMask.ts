@@ -5,6 +5,7 @@ import parseMask from './parseMask';
 import mask from './mask';
 import getRawValue from './getRawValue';
 import isValidInput from './isValidInput';
+import { Token } from './types';
 
 export default {
   mounted: (el: HTMLElement, binding) => {
@@ -67,21 +68,23 @@ export default {
     el.addEventListener('input', (e) => {
       const { selectionStart, selectionEnd, value } =
         e.target as HTMLInputElement;
+      const data = (e as InputEvent).data as string;
 
       function handleInsert() {
         if (
           isValidInput(
-            (e as InputEvent).data as string,
+            data,
             (selectionStart as number) - 1,
             options.maskPattern
           )
         ) {
-          setInputVal(
-            mask(
-              replaceAt(value, selectionStart as number),
-              options.maskPattern
-            )
-          );
+          const pat = options.maskPattern[selectionStart as number - 1] as Token;
+          const insertStr = pat.transform ? pat.transform(data) : data;
+          const str =
+            value.substring(0, selectionStart as number - 1) +
+            insertStr +
+            value.substring(selectionStart as number + 1);
+          setInputVal(str);
         } else {
           setInputVal(curInputVal);
         }

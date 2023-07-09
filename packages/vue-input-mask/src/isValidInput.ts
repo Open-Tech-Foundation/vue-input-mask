@@ -7,7 +7,9 @@ export default function isValidInput(
 ) {
   const token = pattern[curPos];
 
-  if (typeof token === 'object' && token.transform) {
-    return new RegExp(token.pattern).test(token.transform(char));
+  if (typeof token === 'object') {
+    return new RegExp(token.pattern).test(
+      token.transform ? token.transform(char) : char
+    );
   }
 }

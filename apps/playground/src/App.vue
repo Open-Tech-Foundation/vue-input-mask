@@ -42,7 +42,7 @@ const state = reactive({
             </tr> -->
             <tr>
               <td>
-                <input v-model="state.numbers" v-mask="{ mask: '# # # # #' }" />
+                <input v-mask="{ mask: '# # # # #' }" />
               </td>
               <td>Mask: # # # # #</td>
             </tr>
