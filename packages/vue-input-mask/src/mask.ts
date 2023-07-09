@@ -1,5 +1,5 @@
 import { maskChar } from './constants';
-import { Pattern } from './types';
+import type { Pattern } from './types';
 
 export default function mask(val: string, maskPattern: Pattern) {
   let str = '';
@@ -9,13 +9,17 @@ export default function mask(val: string, maskPattern: Pattern) {
     let match = false;
     const token = maskPattern[i];
 
+    if (!token) {
+      continue;
+    }
+
     if (typeof token === 'string') {
       str += token;
       continue;
     }
 
     for (let j = valCur; j < val.length; j++) {
-      let char = val[j];
+      let char = val[j] as string;
       valCur++;
       const regExp = new RegExp(token.pattern);
 

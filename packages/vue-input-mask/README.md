@@ -4,11 +4,11 @@
 
 ⚡ by [OPEN TECH FOUNDATION](https://open-tech-foundation.pages.dev/)
 
-[![Build](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml/badge.svg)](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml)
-
 ![](https://raw.githubusercontent.com/Open-Tech-Foundation/vue-input-mask/main/apps/website/public/demo.png)
 
 </div>
+
+[![Build](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml/badge.svg)](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml)
 
 > The input mask directive for Vue.js.
 
@@ -78,7 +78,7 @@ a  - Lowercase char [a-z], transform: (c) => c.toLocaleLowerCase()
 
 ## Documentation
 
-Please visit [https://vue-input-mask.pages.dev](https://vue-input-mask.pages.dev/) for full documentation.
+Please visit [https://vue-input-mask.pages.dev](https://vue-input-mask.pages.dev/) to get started.
 
 ## License
 

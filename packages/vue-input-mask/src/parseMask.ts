@@ -4,14 +4,14 @@ export default function parseMask(mask: string, tokens: Record<string, Token>) {
   const arr: Pattern = [];
 
   for (let i = 0; i < mask.length; i++) {
-    const c = mask[i];
+    const c = mask[i] as string;
     if (Object.keys(tokens).includes(c)) {
-      arr.push(tokens[c]);
+      arr.push(tokens[c] as Token);
       continue;
     }
 
     if (c === '\\') {
-      arr.push(mask[i + 1]);
+      arr.push(mask[i + 1] as string);
       i++;
       continue;
     }

@@ -1,4 +1,4 @@
-import { Pattern } from './types';
+import type { Pattern } from './types';
 
 export default function isValidInput(
   char: string,
@@ -12,4 +12,6 @@ export default function isValidInput(
       token.transform ? token.transform(char) : char
     );
   }
+
+  return false
 }

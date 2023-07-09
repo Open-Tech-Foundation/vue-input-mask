@@ -1,5 +1,5 @@
 import { maskChar } from './constants';
-import { Pattern } from './types';
+import type { Pattern } from './types';
 
 export default function getRawValue(val: string, pattern: Pattern) {
   let str = '';

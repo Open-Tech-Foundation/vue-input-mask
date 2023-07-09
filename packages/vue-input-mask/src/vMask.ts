@@ -5,10 +5,10 @@ import parseMask from './parseMask';
 import mask from './mask';
 import getRawValue from './getRawValue';
 import isValidInput from './isValidInput';
-import { Token } from './types';
+import type { Binding, Token } from './types';
 
 export default {
-  mounted: (el: HTMLElement, binding) => {
+  mounted: (el: HTMLElement, binding: Binding) => {
     let isFocus = false;
     const input =
       el instanceof HTMLInputElement ? el : el.querySelector('input');
@@ -31,7 +31,7 @@ export default {
       setInputVal(mask(input.value, options.maskPattern));
     });
 
-    function setInputVal(val) {
+    function setInputVal(val: string) {
       curInputVal = val;
       (input as HTMLInputElement).value = val;
       (input as HTMLInputElement).dispatchEvent(new Event('input'));
@@ -40,7 +40,7 @@ export default {
       }
     }
 
-    function setCursorPos(e: Event, start, end) {
+    function setCursorPos(e: Event, start: number, end: number) {
       const pos = (input as HTMLInputElement).value.indexOf(maskChar);
       nextTick(() => {
         (e.target as HTMLInputElement).setSelectionRange(
@@ -54,7 +54,7 @@ export default {
       setCursorPos(e, 0, 0);
     });
 
-    input.addEventListener('blur', (e) => {
+    input.addEventListener('blur', () => {
       isFocus = false;
     });
 
@@ -78,17 +78,19 @@ export default {
             options.maskPattern
           )
         ) {
-          const pat = options.maskPattern[selectionStart as number - 1] as Token;
+          const pat = options.maskPattern[
+            (selectionStart as number) - 1
+          ] as Token;
           const insertStr = pat.transform ? pat.transform(data) : data;
           const str =
-            value.substring(0, selectionStart as number - 1) +
+            value.substring(0, (selectionStart as number) - 1) +
             insertStr +
-            value.substring(selectionStart as number + 1);
+            value.substring((selectionStart as number) + 1);
           setInputVal(str);
         } else {
           setInputVal(curInputVal);
         }
-        setCursorPos(e, selectionStart, selectionEnd);
+        setCursorPos(e, selectionStart as number, selectionEnd as number);
       }
 
       switch ((e as InputEvent).inputType) {
