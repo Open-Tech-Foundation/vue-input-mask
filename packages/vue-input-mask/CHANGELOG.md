@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.9.0
+
+### Minor Changes
+
+- 421e1b2: Migrated to typescript & fixed input focus cursor postion.
+
 ## 0.8.2
 
 ### Patch Changes
