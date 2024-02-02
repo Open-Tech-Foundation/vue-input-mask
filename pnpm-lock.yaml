@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -31,7 +35,7 @@ importers:
     dependencies:
       '@opentf/vue-input-mask':
         specifier: ^0.8.0
-        version: link:../../packages/vue-input-mask
+        version: 0.8.2
       sandpack-vue3:
         specifier: ^3.1.0
         version: 3.1.0(@lezer/common@1.0.2)(vue@3.2.47)
@@ -1246,9 +1250,21 @@ packages:
       - typescript
     dev: true
 
+  /@opentf/utils@0.16.3:
+    resolution: {integrity: sha512-xAjK4t+yIYzwNk2sk4lop9UbQNvMNiOUp2LDF3NRI5xW64jg+j/x4uruBploTXmQHe82xzABFT2O80V0vvB5kA==}
+    engines: {node: ^14.17.0 || >=16.0.0}
+    dev: false
+
   /@opentf/utils@0.20.0:
     resolution: {integrity: sha512-X7ydjAT1jICC+gPMfhJST9svtJw8UtNg/ogSKFJVkufd6XZc3fuf2EjJjRhC0UPrA1b+bWkXDn/QJmHRkazZbw==}
     engines: {node: ^14.17.0 || >=16.0.0}
+    dev: false
+
+  /@opentf/vue-input-mask@0.8.2:
+    resolution: {integrity: sha512-lR/+olYXGH6zemaYe0JMZzAUG2H9n5d2MnlyCwQOrKKs07n2BwKg0teJa8HQRd1s1lYwUL85OXTjs85S88JGxQ==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@opentf/utils': 0.16.3
     dev: false
 
   /@rollup/pluginutils@5.0.2(rollup@3.26.2):
@@ -1349,6 +1365,7 @@ packages:
 
   /@types/node@18.15.11:
     resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
+    requiresBuild: true
     dev: true
     optional: true
 

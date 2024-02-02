@@ -1,15 +1,16 @@
+<img align="left" src="https://open-tech-foundation.pages.dev/img/Logo.svg" width="50" height="50">
+
+&nbsp;[OPEN TECH FOUNDATION](https://open-tech-foundation.pages.dev/)
+
 <div align="center">
 
 # Vue Input Mask
 
-⚡ by [OPEN TECH FOUNDATION](https://open-tech-foundation.pages.dev/)
-
+[![Build](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml/badge.svg)](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml)
 
 ![](https://raw.githubusercontent.com/Open-Tech-Foundation/vue-input-mask/main/apps/website/public/demo.png)
 
 </div>
-
-[![Build](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml/badge.svg)](https://github.com/open-tech-foundation/vue-input-mask/actions/workflows/build.yml)
 
 > The input mask directive for Vue.js.
 
@@ -35,22 +36,20 @@
 
 ## Installation
 
-Using npm
-
 ```shell
 npm install @opentf/vue-input-mask
 ```
-
-Using Yarn
 
 ```shell
 yarn add @opentf/vue-input-mask
 ```
 
-Using pnpm
-
 ```shell
 pnpm add @opentf/vue-input-mask
+```
+
+```shell
+bun add @opentf/vue-input-mask
 ```
 
 ## Usage
