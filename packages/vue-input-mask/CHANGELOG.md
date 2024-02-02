@@ -1,5 +1,11 @@
 # @opentf/vue-input-mask
 
+## 0.10.0
+
+### Minor Changes
+
+- 73f4a79: Added pkg provenance support.
+
 ## 0.9.1
 
 ### Patch Changes
